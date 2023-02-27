@@ -12,7 +12,7 @@ const Todo = () => {
             <Suspense fallback={loading}>    
                 <Switch>
                     <Route path="/todo" render={(props) => <DefaultLayout {...props} />} />
-                    <Redirect from="/" to="todo/home" />
+                    <Redirect from="/" exact to="/todo/home" />
                 </Switch>                       
             </Suspense>
         </HashRouter>

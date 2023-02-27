@@ -3,7 +3,12 @@ import {Route,Switch} from 'react-router-dom'
 import routes from '../router/router'
 import TopNav from '../components/headers/topnav'
 import NavBar from '../components/navbars/navbar1'
+import CardWithThubnail from '../components/cards/cardThumbnail'
+import CardFuturePosts from '../components/cards/cardFuturePosts'
+import StickyBar from '../components/navbars/stickyBar'
+import Footer from '../components/footer/footer'
 const DefaultLayout = () => {
+    const postsData = [{},{}]
     const getroutes = (paths) => {
         return paths.map((prop,key) => {
             if (prop.layout === "/todo"){
@@ -26,11 +31,21 @@ const DefaultLayout = () => {
                 <TopNav/>        
                 <NavBar />                  
             </div>
-            <main class="container">
-                <Switch>
-                    {getroutes(routes)}
-                </Switch>
+            <main className="container">
+                {/* <CardFuturePosts /> */}
+                {/* <CardWithThubnail posts={postsData} /> */}
+                <div className="row g-5">
+                    <div className="col-md-8">
+                        <Switch>
+                            {getroutes(routes)}
+                        </Switch>
+                    </div>
+                    <div className="col-md-4">
+                        <StickyBar />
+                    </div>
+                </div>                
             </main>
+            <Footer />
         </div>
     )
 }

@@ -20,8 +20,8 @@ const StickyBar = () => {
             <div className="p-4">
                 <h4 className="fst-italic">Elsewhere</h4>
                 <ol className="list-unstyled">
-                    <li><a href="https://github.com/prabhu88/TaskMate.git">GitHub</a></li>
-                    <li><a href="#">Twitter</a></li>
+                    <li><a href="https://github.com/prabhu88/TaskMate.git" target="_blank">GitHub</a></li>
+                    <li><a href="https://twitter.com/devildreamshere" target="_blank">Twitter</a></li>
                     <li><a href="#">Facebook</a></li>
                 </ol>
             </div>
