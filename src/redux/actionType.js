@@ -5,4 +5,9 @@ export const TODOADDFAILURE = "TODOADDFAILURE"
 
 
 export const ADDTODO = "ADDTODO"
+export const UPDATETODO = "UPDATETODO"
 export const REMOVETODO = "REMOVETODO"
+
+
+export const COMPLETETODO = "COMPLETETODO"
+export const PENDINGTODO = "COMPLETETODO"

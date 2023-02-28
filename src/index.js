@@ -11,15 +11,23 @@ import 'bootstrap/dist/css/bootstrap-reboot.min.css'
 import 'bootstrap/dist/css/bootstrap-utilities.min.css'
 
 import './assets/css/global.css'
-
+// import {GlobalStyle}  from './themes/global'
+import * as themes from './themes/schema.json'
+import {setToLS} from './themes/utility'
 const root = document.getElementById('todoRoot')
-ReactDOM.render(
+const StartFunction = () =>{
+    setToLS('all-themes',themes.default)
+    return(
         <React.StrictMode>
             <Provider store={store}>     
-                <BrowserRouter>
+                <BrowserRouter>                    
                     <Todo />
                 </BrowserRouter>                
             </Provider>       
-        </React.StrictMode> 
+        </React.StrictMode>
+    )
+}
+ReactDOM.render(
+    <StartFunction />
     ,root
 )
