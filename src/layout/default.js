@@ -7,6 +7,7 @@ import NavBar from '../components/navbars/navbar1'
 // import CardFuturePosts from '../components/cards/cardFuturePosts'
 import StickyBar from '../components/navbars/stickyBar'
 import Footer from '../components/footer/footer'
+import SearchTodos from '../views/searchTodos'
 const DefaultLayout = () => {
     const getroutes = (paths) => {
         return paths.map((prop,key) => {
@@ -38,6 +39,10 @@ const DefaultLayout = () => {
                     <div className="col-md-8">
                         <Switch>
                             {getroutes(routes)}
+                            <Route
+                                path="/todo/search/:id"
+                                render={(props) => <SearchTodos {...props} />}                                
+                            />
                         </Switch>
                     </div>
                     <div className="col-md-4">

@@ -1,14 +1,27 @@
-import React,{useState} from 'react'
-import CardTaskAction from '../components/cards/cardTaskAction'
+import React,{useState,useEffect} from 'react'
+import {useParams} from 'react-router-dom'
 import {useSelector,useDispatch} from 'react-redux'
-const Dashboard = () =>{       
-    
-    const data = useSelector(state => state.todoReducer)    
-    const [todos,setTodos] = useState(data.todos ? data.todos : {})
-    const dispatch = useDispatch()           
-     
+import _ from 'lodash'
+import CardTaskAction from '../components/cards/cardTaskAction'
+
+const SearchTodos = () => {
+    const data = useSelector(state => state.todoReducer)
+    const [todos,setTodos] = useState(data.todos ? data.todos: {})
+    const dispatch = useDispatch()    
+    let { id } = useParams()
+    useEffect(() => {
+        const list = _.filter(data.todos,(todo) =>{
+            return (
+                _.includes(todo.title.toLowerCase(),id.toLowerCase()) ||
+                _.includes(todo.desc.toLowerCase(),id.toLowerCase()) ||
+                _.includes(todo.dueDate.toLowerCase(),id.toLowerCase()) ||
+                _.includes(todo.date.toLowerCase(),id.toLowerCase())
+            )
+        })
+        setTodos(list)        
+    }, [data,id])
     const completeTask = (task_id) => {
-        const result = todos.map(todo => {
+        const result = data.todos.map(todo => {
             if(todo.id == task_id){
                 console.log('called')
                 return {
@@ -27,7 +40,7 @@ const Dashboard = () =>{
         setTodos(result)                 
     }
     const pendingTask = (task_id) => {
-        const result = todos.map(todo => {
+        const result = data.todos.map(todo => {
             if(todo.id == task_id){
                 return {
                     ...todo,
@@ -45,7 +58,7 @@ const Dashboard = () =>{
         setTodos(result)
     }
     const deleteTask = (task_id) => {
-        const result = todos.filter(todo => todo.id != task_id)
+        const result = data.todos.filter(todo => todo.id != task_id)
         //setTodos(result)
         dispatch({
             type : "UPDATETODO",
@@ -54,7 +67,7 @@ const Dashboard = () =>{
         setTodos(result) 
     }
     const importantTask = (task_id) => {
-        const result = todos.map(todo => {
+        const result = data.todos.map(todo => {
             if(todo.id == task_id){
                 return {
                     ...todo,
@@ -72,7 +85,7 @@ const Dashboard = () =>{
         setTodos(result)          
     }
     const normalTask = (task_id) => {
-        const result = todos.map(todo => {
+        const result = data.todos.map(todo => {
             if(todo.id == task_id){
                 return {
                     ...todo,
@@ -91,33 +104,12 @@ const Dashboard = () =>{
     }
     let courtacy = [completeTask,pendingTask,deleteTask,importantTask,normalTask]
     return(
-        <>            
-            <h3 className="pb-4 mb-4 fst-italic border-bottom">
-                From the Dashboard
-            </h3>            
-            <p className="">
-                The Task Mate Todo application dashboard provides a quick and easy overview of the user's tasks and priorities.
-            </p>
-            
-            {/* display important todo's */}
-            <h5 className="pt-4 pb-2 mb=2 fst-italic border-bottom">
-                Important Tasks
-            </h5>            
-            {
-                todos ? <CardTaskAction todos={todos} option="important" callback={courtacy} /> : null
-            }
-            
-            {/* display important todo's */}
-
-            {/* display important todo's */}
-            <h5 className="pt-4 pb-2 mb=2 fst-italic border-bottom">
-                Normal Tasks
-            </h5>      
-            {
-                todos ? <CardTaskAction todos={todos} option="normal" callback={courtacy} /> : null
-            }                  
-            {/* display important todo's */}
+        <>
+            Search Todos {id}
+            <br/>
+            <CardTaskAction todos={todos} option="important" callback={courtacy}/>
+            <CardTaskAction todos={todos} option="normal" callback={courtacy}/>
         </>
     )
 }
-export default Dashboard
+export default SearchTodos
