@@ -1,3 +1,40 @@
 .blog-header {
     border-bottom: 1px solid #e5e5e5;
 }
+.Search-Icon{
+    display: inline;
+}
+.masterDiv:hover .inputSearch{
+    display: none;
+    width: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    transition: width 0.5s ease-in-out;    
+}
+.masterDiv:hover .inputSearch {
+    display: block;    
+    width: 200px;
+    padding: 5px;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+}
+
+.masterDiv:hover .Search-Icon{
+    display: none;
+    
+}
+
+.inputSearch {
+    display: none;   
+}
+
+
+@-webkit-keyframes fadeIn {
+    from { opacity: 0; }
+      to { opacity: 1; }
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+      to { opacity: 1; }
+}
