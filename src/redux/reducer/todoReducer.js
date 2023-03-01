@@ -36,10 +36,7 @@ const todoReducer = (state = initialState, action) => {
             }
             localStorage.setItem('todos',JSON.stringify({
                 todos: [...state.todos, newTodo]
-            }))
-            console.log({
-                todos: [...state.todos, newTodo]
-            })
+            }))            
             return {
                 todos: [...state.todos, newTodo]
             };
@@ -47,15 +44,12 @@ const todoReducer = (state = initialState, action) => {
         case UPDATETODO :            
             localStorage.setItem('todos',JSON.stringify({
                 todos: payload
-            }))  
-            console.log({
-                todos: payload
-            })
+            })) 
+            
             return {
                 todos: payload
             };
-        default :            
-            console.log(state)
+        default :                        
             return state
     }
 }
